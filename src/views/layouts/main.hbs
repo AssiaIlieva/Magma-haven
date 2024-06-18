@@ -5,14 +5,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Book</title>
+    <title>Magma Haven</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
+    <header class="header">
+        <nav>
+            <img src="/images/logo.avif" class="logo">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/catalog">All Volcanoes</a></li>
+                {{#if isAuthenticated}}
+                <li><a href="/create">Create Volcano Wiki</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+                {{else}}
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+    </header>
 
-    <!-- In case of error, you should display div with class "errorContainer" -->
-    <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
+    <main>
+        <!-- In case of error, you should display div with class "errorContainer" -->
+        <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
         {{#if error}}
         <div>
             <div class="errorContainer">
@@ -20,35 +38,13 @@
             </div>
         </div>
         {{/if}}
-
-    <div class="navigation">
-      <nav>
-        <img src="/images/logo.png" />
-        <ul>
-          <!-- Guest users and Logged users -->
-          <li><a href="/">Home</a></li>
-          <li><a href="#">All Courses</a></li>
-          {{#if isAuthenticated}}
-          <!--For loggin users-->
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Create Course Offers</a></li>
-          <li><a href="/auth/logout">Logout</a></li>
-          {{else}}
-          <!--For guest users-->
-          <li><a href="/auth/login">Login</a></li>
-          <li><a href="/auth/register">Register</a></li>
-          {{/if}}
-        </ul>
-      </nav>
-    </div>
-
-    <main>
-
-      {{{body}}}
-
+        {{{body}}}
     </main>
 
-    <footer>Back-End 2023</footer>
-  </body>
+    <footer>
+        <p>&copy JS Back-End 2024</p>
+    </footer>
+
+</body>
 
 </html>
