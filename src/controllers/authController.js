@@ -1,13 +1,14 @@
 const router = require("express").Router();
 
+const { isGuest, isAuth } = require('../middlewares/authMiddlware')
 const authService = require("../services/authService");
 const { getErrorMessage } = require("../utils/errorUtils");
 
-router.get("/register", (req, res) => {
+router.get("/register", isGuest, (req, res) => {
   res.render("auth/register");
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", isGuest, async (req, res) => {
   const userData = req.body;
 
   try {
@@ -16,26 +17,26 @@ router.post("/register", async (req, res) => {
     res.redirect("/");
 } catch (error) {
     const message = getErrorMessage(error);
-    res.render("auth/register", {error: message });
+    res.render("auth/register", {...userData, error: message });
   }
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", isGuest, (req, res) => {
   res.render("auth/login");
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", isGuest, async (req, res) => {
   const { email, password } = req.body;
   try {
     const token = await authService.login(email, password);
     res.cookie("auth", token);
     res.redirect("/");
   } catch (error) {
-    res.render('auth/login', {error: getErrorMessage(error)})
+    res.render('auth/login', {email, error: getErrorMessage(error)})
   }
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", isAuth, (req, res) => {
   res.clearCookie("auth");
   res.redirect("/");
 });
