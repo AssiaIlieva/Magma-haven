@@ -2,13 +2,13 @@
   <h1>Register</h1>
   <form method="post">
     <label>Username</label>
-    <input type="text" placeholder="Username.." name="username" />
+    <input type="text" name="username" placeholder="Username.." {{#if username}} value="{{username}}" {{/if}}/>
     <label>Email</label>
-    <input type="text" placeholder="Email.." name="email" />
+    <input type="text" name="email" placeholder="Email.." {{#if email}} value="{{email}}" {{/if}}/>
     <label>Password</label>
-    <input type="password" placeholder="Password.." name="password" />
+    <input type="password" name="password" placeholder="Password.." />
     <label>Confirm Password</label>
-    <input type="password" placeholder="Confirm Password.." name="rePassword" />
+    <input type="password" name="rePassword" placeholder="Confirm Password.." />
     <input type="submit" value="Submit" />
   </form>
   <p>Already have an account? <a href="/auth/login">Login here</a></p>
