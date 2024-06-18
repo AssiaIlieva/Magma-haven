@@ -1,4 +1,4 @@
-const {Schema, model, MongooseError} = require('mongoose');
+const {Schema, model, MongooseError, default: mongoose} = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -14,7 +14,18 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required'],
-    }
+    },
+    createdVolcanoes: [{
+        type: mongoose.Types.ObjectId,
+        default: [],
+        ref: 'Volcano',
+    }],
+    votedVolcanoes: [{
+        type: mongoose.Types.ObjectId,
+        default: [],
+        ref: 'Volcano'
+    }]
+
 });
 
 userSchema.pre('save', async function(){
