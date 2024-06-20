@@ -12,7 +12,7 @@ const volcanoSchema = new mongoose.Schema({
         required: true,
     },
     elevation: {
-        type: Number,
+        type: [Number, 'The input must be a positive number'],
         min: 0,
         required: true,
     },
@@ -29,7 +29,7 @@ const volcanoSchema = new mongoose.Schema({
     },
     typeVolcano: {
         type: String,
-        enum: [Supervolcanoes, Submarine, Subglacial, Mud, Stratovolcanoes, Shield],
+        enum: [ 'Supervolcanoes', 'Submarine', 'Subglacial', 'Mud', 'Stratovolcanoes', 'Shield' ],
         required: true,
     }, 
     description: {
